@@ -21,7 +21,7 @@ module.exports = {
       serverSelectionTimeoutMS: 30000});
 
     try {
-      _db  = client.db('Dessert');
+      _db  = client.db('Desserts');
       return callback();
     } catch (e) {
       throw e;

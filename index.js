@@ -25,7 +25,7 @@ app.get('/api/liste', (req, res) => {
   mongoUtil.connectToServer( async function( err, client ) {
     if (err) console.log(err);
     var db = mongoUtil.getDb();
-    const desserts = db.collection('dessert');
+    const desserts = db.collection('Dessert');
     const dessert = await desserts.findOne({});
       res.send(dessert);
   } );
