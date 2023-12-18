@@ -25,9 +25,9 @@ app.get('/api/liste', (req, res) => {
   mongoUtil.connectToServer( async function( err, client ) {
     if (err) console.log(err);
     var db = mongoUtil.getDb();
-    const foods = db.collection('food');
-    const food = await foods.findOne({});
-      res.send(food);
+    const desserts = db.collection('dessert');
+    const dessert = await desserts.findOne({});
+      res.send(dessert);
   } );
 });
 
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 //post isteği tanımladık: kullanıcı buraya istek atarak tarif alabilsin diye
-app.post('/api/yemektarifial', async (req, res) => {
+app.post('/api/tatlıtarifial', async (req, res) => {
     const postData = req.body["liste"];
 
     console.log(postData);
