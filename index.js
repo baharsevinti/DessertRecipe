@@ -53,12 +53,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 //post isteği tanımladık: kullanıcı buraya istek atarak tarif alabilsin diye
-app.post('/api/tatlıtarifial', async (req, res) => {
+app.post('/api/tatlitarifial', async (req, res) => {
     const postData = req.body["liste"];
 
     console.log(postData);
 
-var prompt = `Aşağıdaki tatlu  malzemesi listesi için aşağıda listelenen adımları kullanarak bir tarif önerisi hazırlayın. Adımlar şunlardır:
+var prompt = `Aşağıdaki tatlı  malzemesi listesi için aşağıda listelenen adımları kullanarak bir tarif önerisi hazırlayın. Adımlar şunlardır:
 Tarif, Nasıl Hazırlanır: ifadesi ile başlamaldır
 tatlı tarifi (ayrıntılı yazın)
 Nasıl hazırlanır (ayrıntılı yazın)
@@ -79,7 +79,6 @@ console.log(prompt);
         "tarif": output_text,   
     });
 
-  
 });
 
 app.listen(process.env.PORT, () => {
