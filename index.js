@@ -42,6 +42,36 @@ app.get('/api/hazirtarifal', (req, res) => {
   });
 });
 
+// Admin panelinden Tarif silme
+
+app.delete('/api/silTarif/:id', async (req, res) => {
+  const tarifId = parseInt(req.params.id); // id değerini integer'a çevir
+
+  try {
+    const db = mongoUtil.getDb();
+    const recipes = db.collection('recipe');
+
+    // Belirtilen ID'ye sahip tarifi sil
+    const result = await recipes.updateOne(
+      {}, 
+      { $pull: { tarifler: { id: tarifId } } }
+    );
+
+    // Silme işlemi başarılı mı kontrol et
+    if (result.modifiedCount === 0) {
+      return res.status(404).send("Tarif bulunamadı veya zaten silinmiş.");
+    }
+
+    res.status(200).send("Tarif başarıyla silindi.");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+
 
 //basit bir gett isteği oluşturduk
 app.get('/api', (req, res) => {
