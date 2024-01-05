@@ -42,6 +42,17 @@ app.get('/api/hazirtarifal', (req, res) => {
   });
 });
 
+ //Kullanıcı listeleme
+ app.get('/api/user/list', (req, res) => {
+  mongoUtil.connectToServer('test',async function (err, client) {
+    if (err) console.log(err);
+    var db = mongoUtil.getDb();
+    const users = db.collection('users');
+    const userList = await users.find({}).toArray();
+    res.send(userList);
+  });
+});
+
 // Admin panelinden Tarif silme
 
 app.delete('/api/silTarif/:id', async (req, res) => {
@@ -68,10 +79,6 @@ app.delete('/api/silTarif/:id', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-
-
-
 
 //basit bir gett isteği oluşturduk
 app.get('/api', (req, res) => {
