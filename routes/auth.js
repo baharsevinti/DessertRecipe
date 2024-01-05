@@ -8,7 +8,7 @@ const User = require('../models/user');
 router.post('/register', async (req, res) => {
   try {
     console.log(req.body);
-    const { username, password ,email} = req.body;
+    const { username, password, email } = req.body;
 
 
     // Şifreyi hashleme
@@ -23,16 +23,14 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 //Admin oluşturma
 router.post('/createadmin', async (req, res) => {
   try {
-    const { username, password, email } = req.body;
-
-    // Admin kullanıcısı oluştur
+    const { username, password, email } = req.body   // Admin kullanıcısı oluştur
     const hashedPassword = await bcrypt.hash(password, 10);
     const adminUser = new User({ username, password: hashedPassword, email, role: 'admin' });
-    await adminUser.save();
-
+    await adminUser.save()
     res.status(201).json({ message: 'Admin kullanıcısı başarıyla oluşturuldu' });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -43,7 +41,7 @@ router.post('/createadmin', async (req, res) => {
 // Kullanıcı Girişi
 router.post('/login', async (req, res) => {
   try {
-    const { username, password,email} = req.body;
+    const { username, password, email } = req.body;
 
     // Kullanıcıyı bulma
     const user = await User.findOne({ email });

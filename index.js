@@ -65,7 +65,7 @@ app.delete('/api/silTarif/:id', async (req, res) => {
     // Belirtilen ID'ye sahip tarifi sil
     const result = await recipes.updateOne(
       {}, 
-      { $pull: { tarifler: { id: tarifId } } }
+      { $pull: { tatlilar: { id: tarifId } } }
     );
 
     // Silme işlemi başarılı mı kontrol et
